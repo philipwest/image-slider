@@ -1,9 +1,10 @@
+var transitionSpeed = 500;
+var intervalLength = 1500;
 var initSlide = 1;
 var nextSlide;
 var count;
 var slides;
 var loop;
-var fadeSpeed;
 
 $(document).ready(function(){
 	$('.slide:nth-of-type('+initSlide+')').show();
@@ -20,7 +21,7 @@ function startSlider(){
 		setNext(initSlide + 1);
 		showSlide(nextSlide);
 		
-	}, 1500);
+	}, intervalLength);
 
 }
 
@@ -39,7 +40,7 @@ function showSlide(slide){
 //console.log("showSlide: " + slide);
 
 	slides.eq(initSlide - 1).toggle();
-	slides.eq(slide - 1).fadeIn(500);
+	slides.eq(slide - 1).fadeIn(transitionSpeed);
 
 	initSlide = slide;
 	setNext(slide + 1);
