@@ -3,7 +3,7 @@ a{
 	text-decoration: none;
 }
 
-.slider {
+#slider {
 	border: 1px dashed #aaa;
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
@@ -11,7 +11,7 @@ a{
 	overflow: hidden;
 }
 
-.slider,
+#slider,
 .controls{
 	margin: 0 auto;
 	width: 600px;

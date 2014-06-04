@@ -1,3 +1,5 @@
+var sliderId = '#slider';
+var slideClass = '.slide';
 var transitionSpeed = 500;
 var intervalLength = 1500;
 var initSlide = 1;
@@ -7,15 +9,17 @@ var slides;
 var loop;
 
 $(document).ready(function(){
-	$('.slide:nth-of-type('+initSlide+')').show();
-	startSlider();
-
+	$('#slider .slide:nth-of-type(1)').show();	//show initial slide
+	startSlider();												//start slider and begin to loop
+	setHoverPause('#slider, .controls > a');					//set a pause on hover for slider on given selectors
 });
 
 function startSlider(){
-//console.log("startSlider");
-	count = $('.slider > .slide').size();
-	slides = $('.slide');
+
+	stopSlider();	//prevents multiple instances of the 'startSlider' loop from running if called multiple times
+	
+	slides = $(sliderId + ' ' + slideClass);	//get all slides in slider
+	count = slides.size();						//get number of slides present
 
 	loop = setInterval(function(){
 		setNext(initSlide + 1);
@@ -25,7 +29,14 @@ function startSlider(){
 
 }
 
+function stopSlider(){
+
+	window.clearInterval(loop);
+
+}
+
 function setNext(val){
+	
 	if(val > count){
 		nextSlide = 1;
 	}else if(val <= 0){
@@ -33,11 +44,10 @@ function setNext(val){
 	}else{
 		nextSlide = val;
 	}
-//console.log("setNext: " + nextSlide);
+	
 }
 
 function showSlide(slide){
-//console.log("showSlide: " + slide);
 
 	slides.eq(initSlide - 1).toggle();
 	slides.eq(slide - 1).fadeIn(transitionSpeed);
@@ -46,27 +56,33 @@ function showSlide(slide){
 	setNext(slide + 1);
 }
 
-function stopSlider(){
-//console.log("stopSlider");
-	window.clearInterval(loop);
 
-}
 
 function prev(){
-//console.log("prev");
+
 	stopSlider();
+	
 	setNext(initSlide - 1);
-//console.log(nextSlide);
 	showSlide(nextSlide);
-	startSlider();
+	
+//	startSlider(); 	//commented out to prevent slide from changing when selecting through
 }
 
 function next(){
-//console.log("next");
-	stopSlider();
-	setNext(initSlide + 1);
-//console.log(nextSlide);
-	showSlide(nextSlide);
-	startSlider();
 
+	stopSlider();
+
+	setNext(initSlide + 1);
+	showSlide(nextSlide);
+	
+//	startSlider();	//commented out to prevent slide from changing when selecting through
+
+}
+
+function setHoverPause(selector){
+	$(selector).hover(function(){
+		stopSlider();
+	},function(){
+		startSlider();
+	});
 }
