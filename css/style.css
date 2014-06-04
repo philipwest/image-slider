@@ -1,0 +1,37 @@
+a{
+	color: #333;
+	text-decoration: none;
+}
+
+.slider {
+	border: 1px dashed #aaa;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	overflow: hidden;
+}
+
+.slider,
+.controls{
+	margin: 0 auto;
+	width: 600px;
+	height: 400px;
+}
+
+.slide {
+	display:none;
+}
+
+.controls > .prev,
+.controls > .next {
+	background: #ccc;
+	padding: 5px;
+}
+
+.controls > .prev {
+	float: left;
+}
+
+.controls > .next {
+	float: right;
+}
